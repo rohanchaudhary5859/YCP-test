@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>YCP Exam Platform</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="brand">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/L%26T_Infotech_logo.jpg/1280px-L%26T_Infotech_logo.jpg" alt="L&T Infotech logo" class="logo-img">
+        <div class="brand-info">
+          <div class="title">YCP Exam Platform</div>
+          <div class="subtitle">Secure coding assessment</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div id="countdown" class="countdown">04:00:00</div>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="btn ghost" style="margin-left:10px;">🌙</button>
+      </div>
+    </header>
+
+    <!-- BODY MAIN -->
+    <main class="container">
+
+      <!-- Splash -->
+      <section class="card screen active" id="splash">
+        <div class="splash-content">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/L%26T_Infotech_logo.jpg/1280px-L%26T_Infotech_logo.jpg" class="hero-logo">
+
+          <div>
+            <h1>Welcome to the YCP Coding Platform</h1>
+            <p class="muted">A secure, proctored, timed exam experience.</p>
+            <div class="actions">
+              <button class="btn primary" id="toInstr">Proceed to Instructions</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Instructions -->
+      <section class="card screen" id="instructions">
+        <h2>Exam Instructions</h2>
+
+        <ul class="instructions-list">
+          <li><strong>Duration:</strong> 4 Hours</li>
+          <li><strong>5 Problems:</strong> Medium → Hard</li>
+          <li><strong>Autosave Enabled</strong></li>
+          <li><strong>Submit Final on Problem 5</strong></li>
+          <li><strong>Languages:</strong> JS, Python, CPP, Java</li>
+          <li><strong>Camera/Recording:</strong> Required for Proctoring</li>
+        </ul>
+
+        <div class="footer-actions">
+          <button class="btn primary" id="startCamera">I Agree — Continue</button>
+          <button class="btn ghost" id="backToSplash">Back</button>
+        </div>
+      </section>
+
+      <!-- Problem Selection -->
+      <section class="card screen" id="selectProblem">
+        <h2>Select Problem</h2>
+
+        <div style="display:grid;grid-template-columns:250px 1fr;gap:16px;min-height:400px;">
+
+          <!-- SIDEBAR -->
+          <div id="problemListSidebar"
+            style="border-right:1px solid #ddd;overflow-y:auto;padding-right:12px;"></div>
+
+          <!-- DETAILS -->
+          <div id="problemDetailsPanel" style="overflow-y:auto;">
+            <div class="muted">Select a problem to view details</div>
+          </div>
+        </div>
+
+        <div class="footer-actions" style="margin-top:12px;">
+          <button class="btn primary" id="startWithSelected">Start with Selected Problem</button>
+          <button class="btn ghost" id="backToInstructions">Back</button>
+        </div>
+      </section>
+
+      <!-- CAMERA SCREEN -->
+      <section class="card screen" id="camera">
+        <h2>Camera Permission</h2>
+        <p class="muted">Camera needed for proctoring.</p>
+
+        <video id="preview" autoplay playsinline muted class="preview-video"></video>
+
+        <div class="footer-actions">
+          <button class="btn primary" id="allowCam">Allow Camera & Start</button>
+          <button class="btn ghost" id="skipCam">Skip</button>
+          <div id="camStatus" class="muted cam-status">Camera: not started</div>
+          <div class="muted">Status: <span id="camStatusSmall">not started</span></div>
+        </div>
+      </section>
+
+      <!-- EXAM -->
+      <section class="card screen" id="exam">
+        <div class="exam-grid">
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3 id="problemTitle">Problem:</h3>
+              <div class="controls">
+                <select id="language">
+                  <option value="javascript">JavaScript</option>
+                  <option value="python">Python</option>
+                  <option value="cpp">C++</option>
+                  <option value="java">Java</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="problemDesc" class="problem-desc">Loading...</div>
+
+            <textarea id="editor" class="code" spellcheck="false"></textarea>
+
+            <div class="panel-footer">
+              <div>
+                <button class="btn primary" id="runTests">Run Shown Tests</button>
+                <button class="btn ghost" id="submitAll">Submit</button>
+              </div>
+              <div id="lastStatus" class="muted">Not run</div>
+            </div>
+          </div>
+
+          <!-- SIDEBAR -->
+          <aside class="panel sidebar">
+            <h4>Examples</h4>
+            <div id="examples" class="examples muted">Loading...</div>
+
+            <h4 style="margin-top:12px;">Shown Tests</h4>
+            <div id="shownTests" class="tests"></div>
+
+            <h4 style="margin-top:12px;">Proctoring</h4>
+            <div class="muted">Camera: <span id="camStatusSmall">not started</span></div>
+          </aside>
+
+        </div>
+      </section>
+
+      <!-- THANK YOU -->
+      <section class="card screen" id="thankyou">
+        <div class="thankyou-top">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/L%26T_Infotech_logo.jpg/1280px-L%26T_Infotech_logo.jpg" class="mini-logo">
+          <h2>✓ Submission Complete</h2>
+          <p style="color:#7f8c8d;margin-top:8px;">Your submission has been recorded.</p>
+        </div>
+
+        <div id="summary" class="summary"
+          style="background:#f8f9fa;padding:20px;border-radius:6px;margin:20px 0;text-align:left;">
+          <!-- Filled dynamically -->
+        </div>
+
+        <div style="background:#fff3cd;border-left:4px solid #ffc107;padding:15px;border-radius:4px;margin:20px 0;text-align:left;">
+          <p style="margin:0;color:#856404;font-weight:500;">📅 Results available on Friday</p>
+          <p style="margin:8px 0 0 0;color:#856404;font-size:13px;">Your solution is now in evaluation queue.</p>
+        </div>
+
+        <p style="color:#27ae60;font-size:16px;font-weight:500;margin:20px 0;text-align:center;">All the best! 🎯</p>
+
+        <div class="footer-actions">
+          <button class="btn primary" id="downloadReport">Download Report</button>
+          <button class="btn ghost" id="restart">Exit</button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="muted">© YCP Platform — contact <code>support@example.com</code> for help</div>
+    </footer>
+  </div>
+
+  <!-- MAIN JS -->
+  <script src="./app.js"></script>
+
+</body>
+</html>

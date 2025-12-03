@@ -1,0 +1,189 @@
+:root{
+  --bg:#f8fafc;
+  --muted:#64748b;
+  --accent:#0ea5a4;
+  --accent-2:#ef4444;
+  --text:#0f172a;
+  --card-bg:#ffffff;
+  --card-border:rgba(15,23,42,0.06);
+  --code-bg:#f1f5f9;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{
+  height:100%;margin:0;
+  font-family:'Inter',system-ui;
+  background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+
+.app-shell{min-height:100vh;display:flex;flex-direction:column}
+
+/* Topbar */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 24px;
+  border-bottom:1px solid var(--card-border);
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.75);
+}
+
+.brand{display:flex;align-items:center;gap:12px}
+.logo-img{height:44px;border-radius:10px}
+.brand-info .title{font-weight:700;font-size:17px}
+.brand-info .subtitle{font-size:12px;color:var(--muted)}
+
+.top-actions{display:flex;align-items:center;gap:12px}
+
+.countdown{
+  padding:6px 12px;
+  border-radius:10px;
+  font-weight:600;
+  background:rgba(14,165,164,0.08);
+  border:1px solid rgba(14,165,164,0.12);
+  color:var(--accent);
+}
+
+/* Layout */
+.container{
+  width:100%;max-width:1150px;
+  margin:32px auto;padding:0 20px;flex:1;
+}
+
+/* Cards */
+.card{
+  background:var(--card-bg);
+  border-radius:14px;
+  padding:20px;
+  border:1px solid var(--card-border);
+  box-shadow:0 4px 16px rgba(0,0,0,0.04);
+  margin-bottom:20px;
+  transition:all .18s ease;
+}
+.card:hover{
+  transform:translateY(-4px) scale(1.01);
+  box-shadow:0 12px 32px rgba(0,0,0,0.07);
+}
+
+/* Screens */
+.screen{display:none}
+.screen.active{display:block}
+
+/* Splash */
+.splash-content{
+  display:flex;align-items:center;gap:26px;
+}
+.hero-logo{max-width:180px;border-radius:14px}
+.muted{color:var(--muted)}
+
+.actions{margin-top:14px;display:flex;gap:14px}
+
+/* Buttons */
+.btn{
+  padding:10px 16px;border-radius:12px;
+  cursor:pointer;font-weight:600;border:0;
+  transition:all .15s ease;letter-spacing:0.3px;
+}
+.btn.primary{
+  background:linear-gradient(135deg,var(--accent),#14b8a6);
+  color:#fff;box-shadow:0 3px 12px rgba(14,165,164,0.28);
+}
+.btn.primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px rgba(14,165,164,0.4);
+}
+.btn.ghost{
+  background:rgba(255,255,255,0.6);
+  border:1px solid var(--card-border);
+  color:var(--muted);
+}
+.btn.ghost:hover{
+  background:#fff;
+  transform:translateY(-2px);
+}
+
+/* List */
+.instructions-list{padding-left:20px}
+
+/* Footer actions */
+.footer-actions{display:flex;gap:14px;margin-top:18px;align-items:center}
+
+/* Video */
+.preview-video{
+  width:100%;height:270px;background:#000;
+  border-radius:12px;object-fit:cover;
+}
+
+/* Exam layout */
+.exam-grid{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:20px;
+}
+
+/* Panels */
+.panel{display:flex;flex-direction:column;gap:14px}
+
+.panel-header{
+  display:flex;justify-content:space-between;align-items:center;
+}
+
+.controls select{
+  padding:10px;border-radius:10px;
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  color:var(--text);
+}
+
+.code{
+  width:100%;min-height:360px;
+  background:var(--code-bg);
+  border-radius:12px;
+  padding:14px;
+  font-family:'Source Code Pro',monospace;
+  border:1px solid var(--card-border);
+  resize:vertical;
+}
+
+/* Sidebar */
+.sidebar{
+  padding:16px;border-radius:14px;
+  border:1px solid var(--card-border);
+  background:linear-gradient(180deg,#fff,#f7fafc);
+}
+
+.tests{margin-top:10px}
+
+.test-row{
+  display:flex;justify-content:space-between;
+  padding:10px;border-radius:10px;margin-bottom:10px;
+  background:#f8fafc;
+  border:1px solid rgba(12,20,30,0.05);
+}
+
+.test-pass{color:#10b981;font-weight:700}
+.test-fail{color:#dc2626;font-weight:700}
+
+/* Thank you */
+.thankyou-top{display:flex;align-items:center;gap:14px}
+.mini-logo{height:38px}
+
+.summary{
+  margin-top:14px;background:#f8fafc;
+  padding:14px;border-radius:12px;
+  color:var(--muted);font-size:13.5px;
+  border:1px solid var(--card-border);
+}
+
+/* Footer */
+.site-footer{
+  padding:20px;display:flex;justify-content:space-between;
+  color:var(--muted);font-size:13px;
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .exam-grid{grid-template-columns:1fr}
+  .splash-content{flex-direction:column;align-items:flex-start}
+}
